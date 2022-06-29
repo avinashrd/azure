@@ -1,55 +1,41 @@
 {
- "properties": {
-  "displayName": "Only allow images from certain image publishers to be deployed",
-  "policyType": "Custom",
-  "mode": "All",
-  "description": "This policy ensures that only certain image publisher offerings are usable from the image repository",
-  "metadata": {
-   "createdBy": "92d38584-5dc7-42dc-ba62-8acdbefc78ee",
-   "createdOn": "2022-06-29T18:55:36.0322334Z",
-   "updatedBy": "f9a95b66-6794-45df-a05b-65d6e4fffb60",
-   "updatedOn": "2022-06-29T19:57:43.2866657Z",
-   "gitHubPolicy": {
-    "digest": "1579ac29ac160f0742fb705955c2196dc25f63bb",
-    "repoName": "avinashrd/azure",
-    "commitSha": "02031b796cfb8199182852b219775d183b6fa106",
-    "runUrl": "https://github.com/avinashrd/azure/actions/runs/2585538534",
-    "filepath": "policies/Only_allow_images_from_certain_image_publishers_to_be_deployed_allowed-image-publishers-policy"
-   }
-  },
-  "parameters": {
-   "listOfAllowedimagePublishers": {
-    "type": "Array",
-    "metadata": {
-     "displayName": "Allowed image publishers",
-     "description": "The list of publishers to audit against. Example: 'MicrosoftWindowsServer'"
-    }
-   }
-  },
-  "policyRule": {
-   "if": {
-    "allOf": [
-     {
-      "field": "type",
-      "in": [
-       "Microsoft.Compute/virtualMachines",
-       "Microsoft.Compute/VirtualMachineScaleSets"
-      ]
-     },
-     {
-      "not": {
-       "field": "Microsoft.Compute/imagePublisher",
-       "in": "[parameters('listOfAllowedimagePublishers')]"
+   "type": "Microsoft.Authorization/policyDefinitions",
+   "name": "allowed-image-publishers-policy",
+   "properties": {
+      "displayName": "Only allow images from certain image publishers to be deployed",
+      "policyType": "Custom",
+      "description": "This policy ensures that only certain image publisher offerings are usable from the image repository",
+      "mode": "All",
+      "parameters": {
+         "listOfAllowedimagePublishers": {
+            "type": "Array",
+            "metadata": {
+               "description": "The list of publishers to audit against. Example: 'MicrosoftWindowsServer'",
+               "displayName": "Allowed image publishers"
+            }
+         }
+      },
+      "policyRule": {
+         "if": {
+            "allOf": [
+               {
+                  "field": "type",
+                  "in": [
+                     "Microsoft.Compute/virtualMachines",
+                     "Microsoft.Compute/VirtualMachineScaleSets"
+                  ]
+               },
+               {
+                  "not": {
+                     "field": "Microsoft.Compute/imagePublisher",
+                     "in": "[parameters('listOfAllowedimagePublishers')]"
+                  }
+               }
+            ]
+         },
+         "then": {
+            "effect": "deny"
+         }
       }
-     }
-    ]
-   },
-   "then": {
-    "effect": "deny"
    }
-  }
- },
- "id": "/subscriptions/e4a807d8-2736-43ac-b30c-6167f616a2c0/providers/Microsoft.Authorization/policyDefinitions/allowed-image-publishers-policy",
- "type": "Microsoft.Authorization/policyDefinitions",
- "name": "allowed-image-publishers-policy"
 }
