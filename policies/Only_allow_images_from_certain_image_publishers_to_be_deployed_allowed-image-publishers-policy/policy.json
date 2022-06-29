@@ -1,41 +1,55 @@
 {
-   "type": "Microsoft.Authorization/policyDefinitions",
-   "name": "allowed-image-publishers-policy",
-   "properties": {
-      "displayName": "Only allow images from certain image publishers to be deployed",
-      "policyType": "Custom",
-      "description": "This policy ensures that only certain image publisher offerings are usable from the image repository",
-      "mode": "All",
-      "parameters": {
-         "listOfAllowedimagePublishers": {
-            "type": "Array",
-            "metadata": {
-               "description": "The list of publishers to audit against. Example: 'MicrosoftWindowsServer'",
-               "displayName": "Allowed image publishers"
-            }
-         }
-      },
-      "policyRule": {
-         "if": {
-            "allOf": [
-               {
-                  "field": "type",
-                  "in": [
-                     "Microsoft.Compute/virtualMachines",
-                     "Microsoft.Compute/VirtualMachineScaleSets"
-                  ]
-               },
-               {
-                  "not": {
-                     "field": "Microsoft.Compute/imagePublisher",
-                     "in": "[parameters('listOfAllowedimagePublishers')]"
-                  }
-               }
-            ]
-         },
-         "then": {
-            "effect": "deny"
-         }
-      }
+ "properties": {
+  "displayName": "Only allow images from certain image publishers to be deployed",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "This policy ensures that only certain image publisher offerings are usable from the image repository",
+  "metadata": {
+   "createdBy": "59a7c765-c965-476f-b7a0-5c1da20fcbc6",
+   "createdOn": "2022-06-29T20:06:39.7335363Z",
+   "updatedBy": null,
+   "updatedOn": null,
+   "gitHubPolicy": {
+    "digest": "b25c142ef697fef9ed6cdb8974c5c078bf8d44fa",
+    "repoName": "avinashrd/azure",
+    "commitSha": "4f0117a9ce4d5d01ff65ddc2a5adb5114183b2b0",
+    "runUrl": "https://github.com/avinashrd/azure/actions/runs/2585586802",
+    "filepath": "policies/Only_allow_images_from_certain_image_publishers_to_be_deployed_allowed-image-publishers-policy"
    }
+  },
+  "parameters": {
+   "listOfAllowedimagePublishers": {
+    "type": "Array",
+    "metadata": {
+     "displayName": "Allowed image publishers",
+     "description": "The list of publishers to audit against. Example: 'MicrosoftWindowsServer'"
+    }
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "in": [
+       "Microsoft.Compute/virtualMachines",
+       "Microsoft.Compute/VirtualMachineScaleSets"
+      ]
+     },
+     {
+      "not": {
+       "field": "Microsoft.Compute/imagePublisher",
+       "in": "[parameters('listOfAllowedimagePublishers')]"
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/subscriptions/e4a807d8-2736-43ac-b30c-6167f616a2c0/providers/Microsoft.Authorization/policyDefinitions/allowed-image-publishers-policy",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "allowed-image-publishers-policy"
 }

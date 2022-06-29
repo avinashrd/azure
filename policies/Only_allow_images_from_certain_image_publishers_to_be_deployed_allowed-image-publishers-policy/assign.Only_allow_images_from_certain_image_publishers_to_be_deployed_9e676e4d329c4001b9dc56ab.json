@@ -19,10 +19,17 @@
   "metadata": {
    "assignedBy": "Avinash Dhananjaya",
    "parameterScopes": {},
-   "createdBy": "92d38584-5dc7-42dc-ba62-8acdbefc78ee",
-   "createdOn": "2022-06-29T20:02:41.5571425Z",
+   "createdBy": "59a7c765-c965-476f-b7a0-5c1da20fcbc6",
+   "createdOn": "2022-06-29T20:06:40.1990262Z",
    "updatedBy": null,
-   "updatedOn": null
+   "updatedOn": null,
+   "gitHubPolicy": {
+    "digest": "f2afc77465c21ae789fa6fc5403e9933c6c07afb",
+    "repoName": "avinashrd/azure",
+    "commitSha": "4f0117a9ce4d5d01ff65ddc2a5adb5114183b2b0",
+    "runUrl": "https://github.com/avinashrd/azure/actions/runs/2585586802",
+    "filepath": "policies/Only_allow_images_from_certain_image_publishers_to_be_deployed_allowed-image-publishers-policy/assign.Only_allow_images_from_certain_image_publishers_to_be_deployed_9e676e4d329c4001b9dc56ab.json"
+   }
   },
   "enforcementMode": "Default"
  },
