@@ -1,0 +1,48 @@
+{
+ "properties": {
+  "displayName": "Only allow images from certain image publishers to be deployed",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "This policy ensures that only certain image publisher offerings are usable from the image repository",
+  "metadata": {
+   "createdBy": "92d38584-5dc7-42dc-ba62-8acdbefc78ee",
+   "createdOn": "2022-06-29T18:55:36.0322334Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {
+   "listOfAllowedimagePublishers": {
+    "type": "Array",
+    "metadata": {
+     "displayName": "Allowed image publishers",
+     "description": "The list of publishers to audit against. Example: 'MicrosoftWindowsServer'"
+    }
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "in": [
+       "Microsoft.Compute/virtualMachines",
+       "Microsoft.Compute/VirtualMachineScaleSets"
+      ]
+     },
+     {
+      "not": {
+       "field": "Microsoft.Compute/imagePublisher",
+       "in": "[parameters('listOfAllowedimagePublishers')]"
+      }
+     }
+    ]
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/subscriptions/e4a807d8-2736-43ac-b30c-6167f616a2c0/providers/Microsoft.Authorization/policyDefinitions/allowed-image-publishers-policy",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "allowed-image-publishers-policy"
+}
